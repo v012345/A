@@ -1,0 +1,23 @@
+{
+    "cmd": "Convert the SQL into ABAP code.",
+    "sql": [
+        {
+            "table": "T1",
+            "joins": [],
+            "where": {
+                "logic": "AND",
+                "conditions": [
+                    {
+                        "field": "F1",
+                        "operator": "=",
+                        "value": "0001"
+                    },
+                    {
+                        "logic": "OR",
+                        "conditions": []
+                    }
+                ]
+            }
+        }
+    ]
+}

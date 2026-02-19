@@ -1,0 +1,2 @@
+1. 把 `run.cmd` 里的 `py .\xlsx2Json.py --xlsx ".\example.xlsx"` 中的 `.\example.xlsx` 改成要处理的 excel 文件的路径, 然后双击 `run.cmd` 开始转换
+2. `forAI.json` 就是生成的结果
