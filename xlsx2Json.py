@@ -143,7 +143,7 @@ if __name__ == '__main__':
     except StopIteration:
         print("遍历完成")
     forAI = {
-        "cmd": "Convert the SQL into ABAP code.",
+        "cmd": "Convert the SQL into ABAP code ONLY, do not include any explanations or comments.",
         "sql": result
     }
     with open("forAI.json", "w", encoding="utf-8") as f:

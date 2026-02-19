@@ -1,2 +1,2 @@
-py .\xlsx2Json.py --xlsx ".\example.xlsx"
+py .\xlsx2Json.py --xlsx "example.xlsx"
 pause
