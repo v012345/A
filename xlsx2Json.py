@@ -30,7 +30,7 @@ enter_parse_table_state_keywords = [
     "取得テーブル"
 ]
 
-def parse_table_to_json(xtable):
+def parse_select_table_to_json(xtable):
     result = {
         "table": None,
         "joins": [],
@@ -43,6 +43,7 @@ def parse_table_to_json(xtable):
     join_type_col = xtable.find_str_in_row(xtable.row, "結合条件")
     where_row = xtable.find_next_str_in_col(xtable.row, xtable.col, "検索条件")
     
+    join_limit = 0
     # 目前这个例子太小了
     # 如果没有 "検索条件", 那么会不知到怎么退出函数
     # 针对这个例子来说, 现在的实现没有问题
@@ -59,6 +60,10 @@ def parse_table_to_json(xtable):
             join["table"] = xtable.iloc[row, table_name_col]
             join["on"] = xtable.iloc[row, join_type_col + 1]  # 假设 "結合条件" 的下一列是 ON 条件
             result["joins"].append(join)
+            join_limit += 1
+            if join_limit >= 5:  
+                print("禁止链接多于5张表, 请检查设计书")
+                exit(1)
   
     if where_row != -1:
         end_row = xtable.find_empty_in_col(where_row + 1, table_name_col + 1)  # 寻找 "検索条件" 列的第一个空行, 以确定 where 条件的范围
@@ -135,7 +140,7 @@ if __name__ == '__main__':
             value = xlsx.iloc[xlsx.row, xlsx.col]
             if str(value) in enter_parse_table_state_keywords:
                 temp_row, temp_col = xlsx.row, xlsx.col
-                result.append(parse_table_to_json(xlsx))
+                result.append(parse_select_table_to_json(xlsx))
                 xlsx.row, xlsx.col = temp_row, temp_col  # 防止随便粘贴表格
                 xlsx.next() 
             else:
